@@ -1,26 +1,21 @@
-import 'package:flmyapp/add_data.dart';
-import 'package:flmyapp/gstore/gloabal_state.dart';
-import 'package:provider/provider.dart';
-
-import './homeScreens.dart';
+import 'package:flmyapp/add_edit_Screens.dart';
+import 'package:flmyapp/globalstate/globalState.dart';
+import 'package:flmyapp/homeScreens.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (ctx) => GState(),
-        ),
-      ],
+    return ChangeNotifierProvider(
+      create: (ctx) => GState(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (ctx) => HomeScreens(),
-          AddData.routeName: (ctx) => AddData(),
+          AddEditScreens.routeName: (ctx) => AddEditScreens(),
         },
       ),
     );
