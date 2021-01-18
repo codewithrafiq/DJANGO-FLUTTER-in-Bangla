@@ -6,3 +6,4 @@
 ### [🔥🔥Part - 0 - No Code For This Video]()
 ### [🔥🔥Part - 1 - State Management and Smart Navigation ](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/68b8608885cef4bf906fb816d636d50e3cd93cae)
 ### [🔥🔥Part - 2 - HTTP request in Flutter ](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/15aa63972bddf8231e1c4d08e8b50a5e32d4ea8b) 
+### [🔥🔥Part - 3 - Django Flutter Todo List App - 1 ](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/d9b5b5b6173ab6bbcbc861465c595821fcb74d12)
