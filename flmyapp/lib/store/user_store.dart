@@ -34,4 +34,23 @@ class UserStore with ChangeNotifier {
   User get user {
     return _user;
   }
+
+  Future<void> liginNow(String username, String password) async {
+    String url = 'http://10.0.2.2:8000/api/login/';
+    try {
+      http.Response response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(
+          {
+            'username': username,
+            'password': password,
+          },
+        ),
+      );
+      print(response.body);
+    } catch (e) {
+      print(e);
+    }
+  }
 }
