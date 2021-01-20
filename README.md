@@ -9,3 +9,4 @@
 ### [🔥🔥Part - 3 - Django Flutter Todo List App - 1 ](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/d9b5b5b6173ab6bbcbc861465c595821fcb74d12)
 ### [🔥🔥Part - 4 - Django Flutter Todo List App - 2 ](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/e1f9b888f2a7fd3d6c37be5fbdf81c106c1826dc)
 ### [🔥🔥Part - 5 - No Code For This Video]()
+### [🔥🔥Part - 6 - Django and Flutter Shopping App - 1| Django Model](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/d3c8a7890574c16fcd140add28977017f35b9232)
