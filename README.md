@@ -11,3 +11,4 @@
 ### [🔥🔥Part - 5 - No Code For This Video]()
 ### [🔥🔥Part - 6 - Django and Flutter Shopping App - 1| Django Model](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/d3c8a7890574c16fcd140add28977017f35b9232)
 ### [🔥🔥Part - 7 - Django and Flutter Shopping App - 2| Get Products](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/c6d75047d5a4bdf6db350e0a7aed2fe2b9a3093d)
+### [🔥🔥Part - 8 - Django and Flutter Shopping App - 3| Show Products](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/2541e591d10088bbc989d887508051870a3ba0b9)
