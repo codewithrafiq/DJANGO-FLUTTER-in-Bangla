@@ -1,5 +1,8 @@
 import 'package:flmyapp/screens/home_screens.dart';
+import 'package:flmyapp/screens/product_details_screens.dart';
+import 'package:flmyapp/screens/profile_screens.dart';
 import 'package:flmyapp/store/product_store.dart';
+import 'package:flmyapp/store/user_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,11 +16,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => ProductStore(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => UserStore(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (ctx) => HomeScreens(),
+          ProductDetailsScreens.routeName: (ctx) => ProductDetailsScreens(),
+          ProfileScreens.routeName: (ctx) => ProfileScreens(),
         },
       ),
     );
