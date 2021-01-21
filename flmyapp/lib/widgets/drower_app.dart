@@ -1,7 +1,20 @@
+import 'package:flmyapp/screens/login_screens.dart';
 import 'package:flmyapp/screens/profile_screens.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
-class DrowerApp extends StatelessWidget {
+class DrowerApp extends StatefulWidget {
+  @override
+  _DrowerAppState createState() => _DrowerAppState();
+}
+
+class _DrowerAppState extends State<DrowerApp> {
+  LocalStorage storage = LocalStorage("userdata");
+  logoutNew() async {
+    await storage.clear();
+    Navigator.of(context).pushReplacementNamed(LoginScreens.routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -28,6 +41,9 @@ class DrowerApp extends StatelessWidget {
           ),
           Spacer(),
           ListTile(
+            onTap: () {
+              logoutNew();
+            },
             trailing: Icon(Icons.logout),
             title: Text("Logout"),
           ),

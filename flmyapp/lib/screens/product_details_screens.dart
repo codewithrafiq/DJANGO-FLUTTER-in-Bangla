@@ -1,4 +1,3 @@
-import 'package:flmyapp/model/Product.dart';
 import 'package:flmyapp/store/product_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

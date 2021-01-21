@@ -26,3 +26,12 @@ class UserView(views.APIView):
         user_obj = User.objects.get(username=user.username)
         serializer = UserSerializers(user_obj)
         return Response(serializer.data)
+
+
+class Register(views.APIView):
+    def post(self, request):
+        serializers = UserSerializers(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response({"error": False, "message": "User was Created!"})
+        return Response({"error": True, "message": "User Not Created!"})

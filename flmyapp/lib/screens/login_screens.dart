@@ -16,18 +16,38 @@ class _LoginScreensState extends State<LoginScreens> {
     String username;
     String password;
 
-    void _loginBytton() {
+    Future<void> _loginBytton() async {
       var isValid = _form.currentState.validate();
       if (!isValid) {
         return;
       }
       _form.currentState.save();
-      Provider.of<UserStore>(context, listen: false).liginNow(
+
+      bool response =
+          await Provider.of<UserStore>(context, listen: false).liginNow(
         username,
         password,
       );
-      print(username);
-      print(password);
+      if (response) {
+        Navigator.of(context).pushReplacementNamed('/home');
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Sonmthing is Wrong! Try Agane!"),
+              actions: [
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Ok"),
+                )
+              ],
+            );
+          },
+        );
+      }
     }
 
     return Scaffold(

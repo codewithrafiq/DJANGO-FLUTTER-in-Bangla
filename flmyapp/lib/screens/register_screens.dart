@@ -1,5 +1,7 @@
 import 'package:flmyapp/screens/login_screens.dart';
+import 'package:flmyapp/store/user_store.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreens extends StatefulWidget {
   static const routeName = '/register-screens';
@@ -12,15 +14,36 @@ class _RegisterScreensState extends State<RegisterScreens> {
   String username;
   String password1;
   String password2;
-  void _registerNow() {
+  void _registerNow() async {
     var isValid = _form.currentState.validate();
     if (!isValid) {
       return;
     }
     _form.currentState.save();
-    print(username);
-    print(password1);
-    print(password2);
+
+    bool response = await Provider.of<UserStore>(context, listen: false)
+        .registerNow(username, password2);
+
+    if (response) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Sonmthing is Wrong! Try Agane!"),
+            actions: [
+              RaisedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("Ok"),
+              )
+            ],
+          );
+        },
+      );
+    } else {
+      Navigator.of(context).pushReplacementNamed(LoginScreens.routeName);
+    }
   }
 
   @override
