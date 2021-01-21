@@ -1,3 +1,4 @@
+import 'package:flmyapp/store/cart_store.dart';
 import 'package:flmyapp/store/product_store.dart';
 import 'package:flmyapp/store/user_store.dart';
 import 'package:flmyapp/widgets/drower_app.dart';
@@ -18,6 +19,7 @@ class _HomeScreensState extends State<HomeScreens> {
     if (_init) {
       Provider.of<ProductStore>(context, listen: false).getProductsData();
       Provider.of<UserStore>(context, listen: false).getUserData();
+      Provider.of<CartStore>(context, listen: false).getCartDatas();
     }
     _init = false;
     super.didChangeDependencies();
@@ -30,6 +32,7 @@ class _HomeScreensState extends State<HomeScreens> {
       drawer: DrowerApp(),
       appBar: AppBar(
         title: Text("Welcome to My Shop"),
+        actions: [],
       ),
       body: GridView.builder(
         padding: EdgeInsets.all(10),

@@ -12,14 +12,17 @@ class ProfileScreens extends StatelessWidget {
       appBar: AppBar(
         title: Text("Profile"),
       ),
-      body: ListView(
-        children: [
-          Text(user.id.toString()),
-          Text(user.username),
-          Text(user.firstName),
-          Text(user.lastName),
-          Text(user.email),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(user.username),
+            Text(user.firstName),
+            Text(user.lastName),
+            Text(user.email),
+          ],
+        ),
       ),
     );
   }

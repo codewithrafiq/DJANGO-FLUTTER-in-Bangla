@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product
+from .models import *
 from rest_framework.authtoken.models import Token
 
 from django.contrib.auth import get_user_model
@@ -26,3 +26,17 @@ class UserSerializers(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         Token.objects.create(user=user)
         return user
+
+
+class CartSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = "__all__"
+        # depth = 1
+
+
+class CartProductSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = CartProduct
+        fields = "__all__"
+        depth = 1

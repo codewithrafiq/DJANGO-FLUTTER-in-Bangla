@@ -1,5 +1,5 @@
 from rest_framework import generics, mixins, views
-from .models import Product
+from .models import *
 from .serializers import *
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
@@ -35,3 +35,21 @@ class Register(views.APIView):
             serializers.save()
             return Response({"error": False, "message": "User was Created!"})
         return Response({"error": True, "message": "User Not Created!"})
+
+
+class CartView(views.APIView):
+    permission_classes = [IsAuthenticated, ]
+    authentication_classes = [TokenAuthentication, ]
+
+    def get(self, request):
+        user = request.user
+        cart_obj = Cart.objects.filter(user=user).filter(isCompile=False)
+        data = []
+        cart_serializer = CartSerializers(cart_obj, many=True)
+        for cart in cart_serializer.data:
+            cart_product_obj = CartProduct.objects.filter(cart=cart["id"])
+            cart_product_obj_serializer = CartProductSerializers(
+                cart_product_obj, many=True)
+            cart['cartproducts'] = cart_product_obj_serializer.data
+            data.append(cart)
+        return Response(data)

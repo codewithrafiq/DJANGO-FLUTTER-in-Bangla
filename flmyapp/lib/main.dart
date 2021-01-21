@@ -3,6 +3,7 @@ import 'package:flmyapp/screens/login_screens.dart';
 import 'package:flmyapp/screens/product_details_screens.dart';
 import 'package:flmyapp/screens/profile_screens.dart';
 import 'package:flmyapp/screens/register_screens.dart';
+import 'package:flmyapp/store/cart_store.dart';
 import 'package:flmyapp/store/product_store.dart';
 import 'package:flmyapp/store/user_store.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,9 @@ class MyApp extends StatelessWidget {
     LocalStorage storage = LocalStorage("userdata");
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (ctx) => ProductStore(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => UserStore(),
-        ),
+        ChangeNotifierProvider(create: (ctx) => ProductStore()),
+        ChangeNotifierProvider(create: (ctx) => UserStore()),
+        ChangeNotifierProvider(create: (ctx) => CartStore()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
