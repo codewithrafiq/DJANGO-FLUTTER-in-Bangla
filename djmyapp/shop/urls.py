@@ -8,4 +8,6 @@ urlpatterns = [
     path('login/', obtain_auth_token),
     path('register/', Register.as_view()),
     path('cart/', CartView.as_view()),
+    path('favorit/', FavoritView.as_view()),
+
 ]

@@ -1,14 +1,18 @@
 import 'package:flmyapp/screens/product_details_screens.dart';
+import 'package:flmyapp/store/product_store.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SingleProduct extends StatelessWidget {
   final int id;
   final String title;
   final String image;
+  final bool favorit;
   SingleProduct({
     this.id,
     this.title,
     this.image,
+    this.favorit,
   });
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class SingleProduct extends StatelessWidget {
           );
         },
         child: Image.network(
-          image,
+          "http://10.0.2.2:8000$image",
           fit: BoxFit.cover,
         ),
       ),
@@ -29,10 +33,12 @@ class SingleProduct extends StatelessWidget {
         backgroundColor: Colors.black54,
         leading: IconButton(
           icon: Icon(
-            Icons.favorite_border,
+            favorit ? Icons.favorite : Icons.favorite_border,
             color: Colors.red,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Provider.of<ProductStore>(context, listen: false).makeFavorit(id);
+          },
         ),
         title: Text(title),
       ),

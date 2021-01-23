@@ -1,3 +1,4 @@
+import 'package:flmyapp/screens/favorit_Screens.dart';
 import 'package:flmyapp/screens/login_screens.dart';
 import 'package:flmyapp/screens/profile_screens.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,21 @@ class _DrowerAppState extends State<DrowerApp> {
           ),
           ListTile(
             onTap: () {
+              Navigator.of(context).pushReplacementNamed('/home');
+            },
+            trailing: Icon(
+              Icons.home,
+              color: Colors.black,
+            ),
+            title: Text(
+              "Home",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () {
               Navigator.of(context).pushNamed(ProfileScreens.routeName);
             },
             trailing: Icon(
@@ -38,6 +54,17 @@ class _DrowerAppState extends State<DrowerApp> {
                 color: Colors.black,
               ),
             ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(FavoritScreens.routeName);
+            },
+            trailing: Icon(
+              Icons.favorite,
+              color: Colors.red,
+            ),
+            title: Text("Favorites"),
           ),
           Spacer(),
           ListTile(

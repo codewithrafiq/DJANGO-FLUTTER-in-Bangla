@@ -30,6 +30,7 @@ class ProductStore with ChangeNotifier {
             mprice: element['marcket_price'],
             sprice: element['selling_price'],
             description: element['description'],
+            favorit: element['favorit'],
             category: Category(
               id: element['category']['id'],
               title: element['category']['title'],
@@ -52,5 +53,33 @@ class ProductStore with ChangeNotifier {
 
   Product singleProduct(int id) {
     return _products.firstWhere((element) => element.id == id);
+  }
+
+  List<Product> get favorites {
+    return _products.where((element) => element.favorit == true).toList();
+  }
+
+  Future<void> makeFavorit(int id) async {
+    String url = 'http://10.0.2.2:8000/api/favorit/';
+    var token = storage.getItem('mytoken');
+    try {
+      http.Response response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "token $token"
+        },
+        body: json.encode({
+          "id": id,
+        }),
+      );
+      print(response.body);
+
+      Product product = _products.firstWhere((element) => element.id == id);
+      product.favorit = !product.favorit;
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
   }
 }

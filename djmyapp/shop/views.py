@@ -7,14 +7,52 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 
 
-class ProductView(generics.GenericAPIView, mixins.ListModelMixin):
-    queryset = Product.objects.all().order_by('-id')
-    serializer_class = ProductSerializers
+# class ProductView(generics.GenericAPIView, mixins.ListModelMixin):
+#     queryset = Product.objects.all().order_by('-id')
+#     serializer_class = ProductSerializers
+#     permission_classes = [IsAuthenticated, ]
+#     authentication_classes = [TokenAuthentication, ]
+
+#     def get(self, request):
+#         return self.list(request)
+
+
+class ProductView(views.APIView):
     permission_classes = [IsAuthenticated, ]
     authentication_classes = [TokenAuthentication, ]
 
     def get(self, request):
-        return self.list(request)
+        user = request.user
+        query = Product.objects.all()
+        serializers = ProductSerializers(query, many=True)
+        data = []
+        for prod in serializers.data:
+            fab_query = Favorit.objects.filter(
+                user=user).filter(product_id=prod["id"])
+            if fab_query:
+                prod['favorit'] = fab_query[0].isFavorit
+            else:
+                prod['favorit'] = False
+            data.append(prod)
+        return Response(data)
+
+
+class FavoritView(views.APIView):
+    authentication_classes = [TokenAuthentication, ]
+    permission_classes = [IsAuthenticated, ]
+
+    def post(self, request):
+        data = request.data["id"]
+        user = request.user
+        single_product = Favorit.objects.filter(user=user).filter(id=data)
+        if single_product:
+            fab = single_product[0].isFavorit
+            prod = Favorit.objects.get(id=single_product[0].id)
+            prod.isFavorit = not fab
+            prod.save()
+        else:
+            Favorit.objects.create(product_id=data, user=user, isFavorit=True)
+        return Response({"message": "response is Get Successfully"})
 
 
 class UserView(views.APIView):

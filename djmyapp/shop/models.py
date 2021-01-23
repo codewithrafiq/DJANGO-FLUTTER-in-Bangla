@@ -24,8 +24,8 @@ class Product(models.Model):
 
 
 class Favorit(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     isFavorit = models.BooleanField(default=False)
 
     def __str__(self):

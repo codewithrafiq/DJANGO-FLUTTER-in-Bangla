@@ -9,6 +9,7 @@ class Product {
   final int sprice;
   final String description;
   final Category category;
+  bool favorit;
 
   Product({
     this.id,
@@ -19,5 +20,6 @@ class Product {
     this.sprice,
     this.description,
     this.category,
+    this.favorit,
   });
 }

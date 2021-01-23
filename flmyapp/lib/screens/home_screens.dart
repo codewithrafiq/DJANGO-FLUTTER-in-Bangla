@@ -58,6 +58,7 @@ class _HomeScreensState extends State<HomeScreens> {
             id: data.id,
             title: data.title,
             image: data.image,
+            favorit: data.favorit,
           );
         },
       ),

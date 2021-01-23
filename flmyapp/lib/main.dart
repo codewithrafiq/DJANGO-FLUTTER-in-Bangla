@@ -1,4 +1,5 @@
 import 'package:flmyapp/screens/cart_screens.dart';
+import 'package:flmyapp/screens/favorit_Screens.dart';
 import 'package:flmyapp/screens/home_screens.dart';
 import 'package:flmyapp/screens/login_screens.dart';
 import 'package:flmyapp/screens/product_details_screens.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           LoginScreens.routeName: (ctx) => LoginScreens(),
           RegisterScreens.routeName: (ctx) => RegisterScreens(),
           CartScreens.routeName: (ctx) => CartScreens(),
+          FavoritScreens.routeName: (ctx) => FavoritScreens(),
         },
       ),
     );

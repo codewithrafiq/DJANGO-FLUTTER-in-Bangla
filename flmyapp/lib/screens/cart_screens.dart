@@ -1,4 +1,3 @@
-import 'package:flmyapp/model/cartproduct.dart';
 import 'package:flmyapp/store/cart_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
