@@ -26,7 +26,7 @@ class UserStore with ChangeNotifier {
           lastName: data['last_name'],
           email: data['email'],
         );
-        print(newUser);
+        // print(newUser);
         _user = newUser;
       }
     } catch (e) {

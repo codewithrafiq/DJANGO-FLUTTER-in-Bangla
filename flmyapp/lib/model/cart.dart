@@ -1,17 +1,11 @@
-import 'package:flmyapp/model/cartproduct.dart';
-
-class Cart {
+class CartModel {
   final int id;
   final int total;
-  final bool isComplit;
   final String date;
-  final List<CartProduct> cartproducts;
 
-  Cart({
+  CartModel({
     this.id,
     this.total,
-    this.isComplit,
     this.date,
-    this.cartproducts,
   });
 }

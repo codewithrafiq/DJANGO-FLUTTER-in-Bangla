@@ -1,3 +1,4 @@
+import 'package:flmyapp/screens/cart_screens.dart';
 import 'package:flmyapp/store/cart_store.dart';
 import 'package:flmyapp/store/product_store.dart';
 import 'package:flmyapp/store/user_store.dart';
@@ -32,7 +33,15 @@ class _HomeScreensState extends State<HomeScreens> {
       drawer: DrowerApp(),
       appBar: AppBar(
         title: Text("Welcome to My Shop"),
-        actions: [],
+        actions: [
+          FlatButton.icon(
+            onPressed: () {
+              Navigator.of(context).pushNamed(CartScreens.routeName);
+            },
+            icon: Icon(Icons.shopping_cart),
+            label: Text("0"),
+          ),
+        ],
       ),
       body: GridView.builder(
         padding: EdgeInsets.all(10),
