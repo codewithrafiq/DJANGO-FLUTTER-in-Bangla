@@ -38,12 +38,30 @@ class CartScreens extends StatelessWidget {
             return Card(
               child: Padding(
                 padding: EdgeInsets.all(10),
-                child: Column(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text("${item.product.title}"),
-                    Text("Price: ${item.price}"),
-                    Text("Quantity: ${item.quantity}"),
-                    Text("Subtotal: ${item.subtotal}"),
+                    Column(
+                      children: [
+                        Text("${item.product.title}"),
+                        Text("Price: ${item.price}"),
+                        Text("Quantity: ${item.quantity}"),
+                        Text("Subtotal: ${item.subtotal}"),
+                      ],
+                    ),
+                    RaisedButton(
+                      color: Colors.red,
+                      onPressed: () {
+                        cartState.delateCartProduct(item.id);
+                      },
+                      child: Text(
+                        "Delate",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

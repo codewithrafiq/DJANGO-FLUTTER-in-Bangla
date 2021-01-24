@@ -1,3 +1,4 @@
+import 'package:flmyapp/model/cartproduct.dart';
 import 'package:flmyapp/screens/cart_screens.dart';
 import 'package:flmyapp/store/cart_store.dart';
 import 'package:flmyapp/store/product_store.dart';
@@ -29,6 +30,7 @@ class _HomeScreensState extends State<HomeScreens> {
   @override
   Widget build(BuildContext context) {
     final products = Provider.of<ProductStore>(context).products;
+    final cartProducts = Provider.of<CartStore>(context).cartproducts;
     return Scaffold(
       drawer: DrowerApp(),
       appBar: AppBar(
@@ -38,8 +40,16 @@ class _HomeScreensState extends State<HomeScreens> {
             onPressed: () {
               Navigator.of(context).pushNamed(CartScreens.routeName);
             },
-            icon: Icon(Icons.shopping_cart),
-            label: Text("0"),
+            icon: Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+            ),
+            label: Text(
+              "${cartProducts.length}",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
         ],
       ),

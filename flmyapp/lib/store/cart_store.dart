@@ -23,6 +23,7 @@ class CartStore with ChangeNotifier {
       _data = responsdata;
       _cartModel();
       _cartProduct();
+      notifyListeners();
     } catch (e) {}
   }
 
@@ -63,5 +64,34 @@ class CartStore with ChangeNotifier {
 
   List<CartProduct> get cartproducts {
     return [..._cartProduct()];
+  }
+
+  Future<void> addToCart(int id) async {
+    String url = 'http://10.0.2.2:8000/api/addtocart/';
+    var token = storage.getItem('mytoken');
+    try {
+      http.Response response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "token $token"
+        },
+        body: json.encode({
+          "id": id,
+        }),
+      );
+      var data = json.decode(response.body) as Map;
+      print(data["error"]);
+      if (data["error"] == false) {
+        getCartDatas();
+        notifyListeners();
+      }
+    } catch (e) {}
+  }
+
+  void delateCartProduct(int id) {
+    _cartProduct().remove((element) => element.id == id);
+
+    notifyListeners();
   }
 }

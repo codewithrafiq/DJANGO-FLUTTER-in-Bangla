@@ -3,8 +3,8 @@ import 'package:flmyapp/model/Product.dart';
 class CartProduct {
   final int id;
   final int price;
-  final int quantity;
-  final int subtotal;
+  int quantity;
+  int subtotal;
   final Product product;
 
   CartProduct({
