@@ -16,3 +16,4 @@
 ### [🔥🔥 Part - 10 --Shopping App - 5- Django Login Register by Flutter](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/39f039792bf2366778d27c3a2c771621fb56307f)
 ### [🔥🔥 Part - 11 --Shopping App - 6- Django Cart GET, API ](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/a17743cc50378c7160f4f7edb3804ca7f6a0e81b)
 ### [🔥🔥 Part - 12 --Shopping App - 7](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/fcdea9e231642a9e744779cba585ef69a92d312e)
+### [🔥🔥 Part - 13 --Shopping App - 8](https://github.com/codewithrafiq/DJANGO-FLUTTER-in-Bangla/tree/898c33925cb1fe684b9d1a740db54c149df5b22d)
