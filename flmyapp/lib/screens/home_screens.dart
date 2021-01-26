@@ -1,4 +1,3 @@
-import 'package:flmyapp/model/cartproduct.dart';
 import 'package:flmyapp/screens/cart_screens.dart';
 import 'package:flmyapp/store/cart_store.dart';
 import 'package:flmyapp/store/product_store.dart';
@@ -22,6 +21,7 @@ class _HomeScreensState extends State<HomeScreens> {
       Provider.of<ProductStore>(context, listen: false).getProductsData();
       Provider.of<UserStore>(context, listen: false).getUserData();
       Provider.of<CartStore>(context, listen: false).getCartDatas();
+      Provider.of<CartStore>(context, listen: false).getCartProductsDatas();
     }
     _init = false;
     super.didChangeDependencies();
@@ -45,7 +45,7 @@ class _HomeScreensState extends State<HomeScreens> {
               color: Colors.white,
             ),
             label: Text(
-              "${cartProducts.length}",
+              "${cartProducts != null ? cartProducts.length : ''}",
               style: TextStyle(
                 color: Colors.white,
               ),

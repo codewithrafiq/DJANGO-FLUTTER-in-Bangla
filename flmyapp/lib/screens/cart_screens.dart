@@ -9,66 +9,76 @@ class CartScreens extends StatelessWidget {
     final cartState = Provider.of<CartStore>(context);
     final cart = cartState.cart;
     final cartProducts = cartState.cartproducts;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("My Cart"),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(6),
-        child: ListView.builder(
-          itemCount: cartProducts.length + 1,
-          itemBuilder: (ctx, i) {
-            if (i == 0) {
+    if ((cart == null) || (cartProducts == null))
+      return Scaffold(
+        body: Center(
+          child: Text(
+            "No Cart",
+            style: TextStyle(
+              fontSize: 30,
+            ),
+          ),
+        ),
+      );
+    else
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("My Cart"),
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(6),
+          child: ListView.builder(
+            itemCount: cartProducts.length + 1,
+            itemBuilder: (ctx, i) {
+              if (i == 0) {
+                return Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text("Total : "),
+                        Text("${cart.total}"),
+                        Text("Date: "),
+                        Text("${cart.date} ")
+                      ],
+                    ),
+                  ),
+                );
+              }
+              var item = cartProducts[i - 1];
               return Card(
                 child: Padding(
                   padding: EdgeInsets.all(10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Total : "),
-                      Text("${cart.total}"),
-                      Text("Date: "),
-                      Text("${cart.date} ")
+                      Column(
+                        children: [
+                          Text(item.product.title),
+                          Text("Price: ${item.price}"),
+                          Text("Quantity: ${item.quantity}"),
+                          Text("Subtotal: ${item.subtotal}"),
+                        ],
+                      ),
+                      RaisedButton(
+                        color: Colors.red,
+                        onPressed: () {},
+                        child: Text(
+                          "Delate",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
               );
-            }
-            var item = cartProducts[i - 1];
-            return Card(
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Text("${item.product.title}"),
-                        Text("Price: ${item.price}"),
-                        Text("Quantity: ${item.quantity}"),
-                        Text("Subtotal: ${item.subtotal}"),
-                      ],
-                    ),
-                    RaisedButton(
-                      color: Colors.red,
-                      onPressed: () {
-                        cartState.delateCartProduct(item.id);
-                      },
-                      child: Text(
-                        "Delate",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            );
-          },
+            },
+          ),
         ),
-      ),
-    );
+      );
   }
 }

@@ -8,7 +8,8 @@ import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
 
 class CartStore with ChangeNotifier {
-  List _data = [];
+  CartModel _cartModel;
+  List<CartProduct> _cartproduct;
 
   LocalStorage storage = LocalStorage("userdata");
 
@@ -19,51 +20,59 @@ class CartStore with ChangeNotifier {
       http.Response response = await http.get(url, headers: {
         "Authorization": "token $token",
       });
-      var responsdata = json.decode(response.body) as List;
-      _data = responsdata;
-      _cartModel();
-      _cartProduct();
-      notifyListeners();
-    } catch (e) {}
+      var data = json.decode(response.body);
+
+      CartModel cartModel = CartModel(
+        id: data['id'],
+        date: data["date"],
+        total: data["total"],
+      );
+      _cartModel = cartModel;
+    } catch (e) {
+      print(e);
+    }
   }
 
-  CartModel _cartModel() => CartModel(
-        id: _data[0]["id"],
-        date: _data[0]["date"],
-        total: _data[0]['total'],
-      );
-
-  List<CartProduct> _cartProduct() {
-    List<CartProduct> temp = [];
-    var cartprod = _data[0]['cartproducts'] as List;
-    cartprod.forEach((element) {
-      CartProduct cartProduct = CartProduct(
-        id: element["id"],
-        price: element["price"],
-        quantity: element["quantity"],
-        subtotal: element['subtotal'],
-        product: Product(
-          id: element['product'][0]["id"],
-          title: element['product'][0]["title"],
-          sprice: element['product'][0]["selling_price"],
-          mprice: element['product'][0]["marcket_price"],
-          image: element['product'][0]["image"],
-          description: element['product'][0]["description"],
-          date: element['product'][0]["data"],
-          category: null,
-        ),
-      );
-      temp.add(cartProduct);
-    });
-    return temp;
+  Future<void> getCartProductsDatas() async {
+    String url = 'http://10.0.2.2:8000/api/cartproduct/';
+    var token = storage.getItem('mytoken');
+    try {
+      http.Response response = await http.get(url, headers: {
+        "Authorization": "token $token",
+      });
+      var data = json.decode(response.body) as List;
+      List<CartProduct> _temp = [];
+      data.forEach((element) {
+        CartProduct tempcp = CartProduct(
+          id: element['id'],
+          price: element['price'],
+          quantity: element['quantity'],
+          subtotal: element['subtotal'],
+          product: Product(
+            id: element['product']["id"],
+            title: element['product']["title"],
+          ),
+        );
+        _temp.add(tempcp);
+      });
+      _cartproduct = _temp;
+    } catch (e) {
+      print(e);
+    }
   }
 
   CartModel get cart {
-    return _cartModel();
+    if (_cartModel != null) {
+      return _cartModel;
+    }
+    return null;
   }
 
   List<CartProduct> get cartproducts {
-    return [..._cartProduct()];
+    if (_cartproduct != null) {
+      return [..._cartproduct];
+    }
+    return null;
   }
 
   Future<void> addToCart(int id) async {
@@ -83,15 +92,9 @@ class CartStore with ChangeNotifier {
       var data = json.decode(response.body) as Map;
       print(data["error"]);
       if (data["error"] == false) {
-        getCartDatas();
+        getCartProductsDatas();
         notifyListeners();
       }
     } catch (e) {}
-  }
-
-  void delateCartProduct(int id) {
-    _cartProduct().remove((element) => element.id == id);
-
-    notifyListeners();
   }
 }

@@ -7,8 +7,8 @@ urlpatterns = [
     path('user/', UserView.as_view()),
     path('login/', obtain_auth_token),
     path('register/', Register.as_view()),
-    path('cart/', CartView.as_view()),
     path('favorit/', FavoritView.as_view()),
     path('addtocart/', AddToCart.as_view()),
-
+    path('cart/', CartView.as_view()),
+    path('cartproduct/', CartProductView.as_view()),
 ]

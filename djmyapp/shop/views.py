@@ -81,15 +81,30 @@ class CartView(views.APIView):
 
     def get(self, request):
         user = request.user
-        cart_obj = Cart.objects.filter(user=user).filter(isCompile=False)
+        cart_obj = Cart.objects.filter(
+            user=user).filter(isCompile=False).first()
+        cart_serializer = CartSerializers(cart_obj)
+        return Response(cart_serializer.data)
+
+
+class CartProductView(views.APIView):
+    permission_classes = [IsAuthenticated, ]
+    authentication_classes = [TokenAuthentication, ]
+
+    def get(self, request):
+        user = request.user
+        cart_obj = Cart.objects.filter(
+            user=user).filter(isCompile=False).first()
+        cart_product_obj = CartProduct.objects.filter(cart=cart_obj.id)
+        cart_product_obj_serializer = CartProductSerializers(
+            cart_product_obj, many=True)
         data = []
-        cart_serializer = CartSerializers(cart_obj, many=True)
-        for cart in cart_serializer.data:
-            cart_product_obj = CartProduct.objects.filter(cart=cart["id"])
-            cart_product_obj_serializer = CartProductSerializers(
-                cart_product_obj, many=True)
-            cart['cartproducts'] = cart_product_obj_serializer.data
-            data.append(cart)
+        for cproduct in cart_product_obj_serializer.data:
+            product_obj = Product.objects.filter(
+                id=cproduct['product'][0]).first()
+            cart_product_obj_serializer = ProductSerializers(product_obj)
+            cproduct['product'] = cart_product_obj_serializer.data
+            data.append(cproduct)
         return Response(data)
 
 
